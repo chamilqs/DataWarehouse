@@ -24,20 +24,18 @@ namespace LoadDWVentas.Data.Sercices
             
             try
             {
-                //Obtenemos todos los empleados
                 var customers = _northwindContext.Customers.AsNoTracking().Select(cus => new DimCustomer() {
                     CustomerID = cus.CustomerID,
                     CompanyName = cus.CompanyName,
                 }).ToList();
 
-                //Insertamos en la dimensión
                 await _dwSalesContext.DimCustomers.AddRangeAsync(customers);
                 await _dwSalesContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {
                 result.Success = false;
-                result.Message = $"Error al cargar la dimensión Customer {ex.Message}";
+                result.Message = $"Error cargando la dimensión Customer {ex.Message}";
             }
 
             return result;
@@ -49,20 +47,18 @@ namespace LoadDWVentas.Data.Sercices
             
             try
             {
-                //Obtenemos todos los empleados
                 var employees = _northwindContext.Employees.AsNoTracking().Select(emp => new DimEmployee() {
                     EmployeeID = emp.EmployeeID,
                     FullName = string.Concat(emp.FirstName, " ", emp.LastName)
                 }).ToList();
 
-                //Insertamos en la dimensión
                 await _dwSalesContext.DimEmployees.AddRangeAsync(employees);
                 await _dwSalesContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {
                 result.Success = false;
-                result.Message = $"Error al cargar la dimensión Employee {ex.Message}";
+                result.Message = $"Error cargando la dimensión Employee {ex.Message}";
             }
 
             return result;
@@ -74,7 +70,6 @@ namespace LoadDWVentas.Data.Sercices
 
             try
             {
-                //Obtenemos todos los productos
                 var products = (from product in _northwindContext.Products
                 join category in _northwindContext.Categories on product.CategoryID equals category.CategoryID
                 select new DimProduct() {
@@ -84,14 +79,13 @@ namespace LoadDWVentas.Data.Sercices
                     CategoryName = category.CategoryName
                 }).AsNoTracking().ToList();
 
-                //Insertamos en la dimensión
                 await _dwSalesContext.DimProducts.AddRangeAsync(products);
                 await _dwSalesContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {
                 result.Success = false;
-                result.Message = $"Error al cargar la dimensión Product. {ex.Message}";
+                result.Message = $"Error cargando la dimensión Product. {ex.Message}";
             }
 
             return result;
@@ -103,13 +97,11 @@ namespace LoadDWVentas.Data.Sercices
             
             try
             {
-                //Obtenemos todos los empleados
                 var shippers = _northwindContext.Shippers.AsNoTracking().Select(emp => new DimShipper() {
                     ShipperID = emp.ShipperID,
                     CompanyName = emp.CompanyName
                 }).ToList();
 
-                //Insertamos en la dimensión
                 await _dwSalesContext.DimShippers.AddRangeAsync(shippers);
                 await _dwSalesContext.SaveChangesAsync();
             }
@@ -128,8 +120,7 @@ namespace LoadDWVentas.Data.Sercices
             
             try
             {
-                //Obtenemos todos los empleados
-                var sales = await _northwindContext.VWSales.AsNoTracking().ToListAsync();
+                var sales = await _northwindContext.VWSales.ToListAsync();
             }
             catch (Exception ex)
             {
@@ -146,7 +137,6 @@ namespace LoadDWVentas.Data.Sercices
             
             try
             {
-                //Obtenemos todos los empleados
                 var customersserved = await _northwindContext.VWCustomersServed.AsNoTracking().ToListAsync();
             }
             catch (Exception ex)
