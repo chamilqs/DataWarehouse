@@ -21,8 +21,6 @@ public class Worker : BackgroundService
         {
             if (_logger.IsEnabled(LogLevel.Information))
             {
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-
                 using(var scope = _serviceScopeFactory.CreateScope())
                 {
                     var dataService = scope.ServiceProvider.GetRequiredService<IDataServiceDwSales>();
