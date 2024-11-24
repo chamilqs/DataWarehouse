@@ -11,7 +11,6 @@ namespace LoadDWVentas.Data.Context
             
         }
 
-        // DbSets //
         #region "Db Sets"
             public DbSet<Category> Categories { get; set; }
             public DbSet<Customer> Customers { get; set; }
@@ -29,7 +28,7 @@ namespace LoadDWVentas.Data.Context
         {
             modelBuilder.Entity<Product>()
                 .Property(p => p.UnitPrice)
-                .HasPrecision(18, 2); // 18 dígitos en total, 2 después del punto decimal
+                .HasPrecision(18, 2); 
             modelBuilder.Entity<VWSales>(entity => 
             {
                 entity.HasNoKey().ToView("VWSales");

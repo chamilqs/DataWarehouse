@@ -108,7 +108,7 @@ namespace LoadDWVentas.Data.Sercices
             catch (Exception ex)
             {
                 result.Success = false;
-                result.Message = $"Error al cargar la dimensión Shipper {ex.Message}";
+                result.Message = $"Error cargando la dimensión Shipper {ex.Message}";
             }
 
             return result;
@@ -120,12 +120,12 @@ namespace LoadDWVentas.Data.Sercices
             
             try
             {
-                var sales = await _northwindContext.VWSales.ToListAsync();
+                var sales = await _northwindContext.VWSales.AsNoTracking().ToListAsync();
             }
             catch (Exception ex)
             {
                 result.Success = false;
-                result.Message = $"Error al cargar la dimensión Shipper {ex.Message}";
+                result.Message = $"Error cargando la dimensión Shipper {ex.Message}";
             }
 
             return result;
@@ -142,7 +142,7 @@ namespace LoadDWVentas.Data.Sercices
             catch (Exception ex)
             {
                 result.Success = false;
-                result.Message = $"Error al cargar la dimensión Shipper {ex.Message}";
+                result.Message = $"Error cargando la dimensión Shipper {ex.Message}";
             }
 
             return result;
@@ -159,7 +159,7 @@ namespace LoadDWVentas.Data.Sercices
             catch (Exception ex)
             {
                 result.Success = false;
-                result.Message = $"Error al cargar la dimensión Shipper {ex.Message}";
+                result.Message = $"Error cargando la dimensión Shipper {ex.Message}";
             }
             return result;
         }
